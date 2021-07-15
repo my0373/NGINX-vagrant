@@ -1,0 +1,4 @@
+---
+collections:
+# Include the ansible.posix collection to copy the SSH key
+- ansible.posix
