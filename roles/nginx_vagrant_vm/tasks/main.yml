@@ -1,0 +1,75 @@
+---
+# tasks file for nginx_vagrant_vm
+
+- name: Copy the user public key into the Vagrant VM for the Vagrant user
+  ansible.posix.authorized_key:
+    user: vagrant
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+
+- name: Install tracer
+  yum:
+    name: 'tracer'
+    state: latest
+  become: yes 
+
+- name: Update the OS
+  yum:
+    name: '*'
+    state: latest
+  become: yes 
+
+- name: Create the NGINX SSL directory if it does not exist
+  ansible.builtin.file:
+    path: /etc/ssl/nginx
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+  become: yes 
+
+- name: Copy Repo certificates from ~/Downloads to the new VM
+  copy:
+    src: ~/Downloads/nginx-repo.crt
+    dest: /etc/ssl/nginx
+    owner: root
+    group: root        
+    mode: 0644
+  become: yes 
+
+- name: Copy Repo key from ~/Downloads to the new VM
+  copy:
+    src: ~/Downloads/nginx-repo.key
+    dest: /etc/ssl/nginx
+    owner: root
+    group: root        
+    mode: 0644
+  become: yes 
+
+- name: Install CA Certificates
+  yum:
+    name: 'ca-certificates'
+    state: latest
+  become: yes 
+
+- name: Download the NGINX-Plus repo from https://cs.nginx.com/static/files/nginx-plus-7.5.repo
+  yum_repository:
+    name: nginx-pLus
+    description: nginx-plus repo
+    baseurl: https://pkgs.nginx.com/plus/centos/8/$basearch/
+    sslclientcert: /etc/ssl/nginx/nginx-repo.crt
+    sslclientkey: /etc/ssl/nginx/nginx-repo.key
+    repo_gpgcheck: no
+    enabled: yes
+  become: yes 
+
+- name: Install NGINX Plus
+  yum:
+    name: 'nginx-plus'
+    state: latest
+      #TODO: Need to come back to this one....
+    disable_gpg_check: yes
+  become: yes 
+  notify: nginx_service 
+
+- debug: var=ansible_all_ipv4_addresses

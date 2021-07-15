@@ -1,0 +1,7 @@
+---
+# handlers file for nginx_vagrant_vm
+- name: nginx_service
+  service:
+    name: nginx.service
+    enabled: true
+    state: restarted

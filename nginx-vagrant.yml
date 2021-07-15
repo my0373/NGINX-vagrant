@@ -1,0 +1,6 @@
+- name: provision a CentOS Vagrant VM
+#  hosts: ansible_host
+  hosts: all
+  become: true
+  roles:
+    - nginx_vagrant_vm
