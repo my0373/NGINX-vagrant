@@ -14,7 +14,14 @@ Vagrant and ansible playbooks to provision a simple CentOS 7  VM with NGINX+ and
     cd NGINX-vagrant
     vagrant up
     
+    
 At the end of run you'll see the IP address of the machine printed out to connect to.
+
+
+You will then be able to connect to the dashboard at http://[ip-address]/dashboard
+You can test App Protect is working with a fake XSS URI
+    http://[ip-address]/dashboard?a=<script>
+
 
 # Official documentation
 ### Admin install guide
