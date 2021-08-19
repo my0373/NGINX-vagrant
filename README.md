@@ -32,3 +32,7 @@ https://docs.nginx.com/nginx-app-protect/configuration/
 
 ### Policy authoring guide
 https://docs.nginx.com/nginx-app-protect/configuration/#policy-authoring-and-tuning
+    
+
+# other documentation
+https://rtd-nginx-app-protect-udf.readthedocs.io/en/latest/class2/module4/module4.html 
