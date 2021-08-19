@@ -22,3 +22,6 @@ https://docs.nginx.com/nginx-app-protect/admin-guide/install
 
 ### Configuring App-protect
 https://docs.nginx.com/nginx-app-protect/configuration/
+
+### Policy authoring guide
+https://docs.nginx.com/nginx-app-protect/configuration/#policy-authoring-and-tuning
