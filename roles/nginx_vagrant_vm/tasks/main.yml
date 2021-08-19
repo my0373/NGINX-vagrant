@@ -128,6 +128,16 @@
     state: latest
   become: yes
 
+- name: Update the NGINX App protect logging config
+  template:
+    src: etc/app_protect/conf/log_default.json
+    dest: /etc/app_protect/conf/log_default.json
+    owner: root
+    group: root
+    mode: '0644'
+    backup: no
+  notify: nginx_service
+  become: true
 
 
 - debug: var=ansible_all_ipv4_addresses
