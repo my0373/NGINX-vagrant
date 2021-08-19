@@ -15,3 +15,10 @@ Vagrant and ansible playbooks to provision a simple CentOS 7  VM with NGINX+ and
     vagrant up
     
 At the end of run you'll see the IP address of the machine printed out to connect to.
+
+# Official documentation
+###Admin install guide
+https://docs.nginx.com/nginx-app-protect/admin-guide/install
+
+### Configuring App-protect
+https://docs.nginx.com/nginx-app-protect/configuration/
